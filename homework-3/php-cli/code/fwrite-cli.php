@@ -30,7 +30,7 @@ function validate(string $date): bool
     }
 
     foreach ($dateBlocks as $dateBlock) {
-        if (!isset($dateBlock) || is_numeric($dateBlock)) {
+        if (!isset($dateBlock) || !is_numeric($dateBlock)) {
             return false;
         }
     }
@@ -54,4 +54,4 @@ function validate(string $date): bool
     return true;
 }
 // Добавлена проверка на год. Год не должен быть меньше 1930
-// Добавлена проверка на число
+// Добавлена проверка на число. Вводимые данныые не должны быть буквами.
