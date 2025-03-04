@@ -5,7 +5,7 @@ $address = '/code/birthdays.txt';
 $name = readline("Введите имя: ");
 $date = readline("Введите дату рождения в формате ДД-ММ-ГГГГ: ");
 
-if (validate($date)) {
+if (validate($date, $name)) {
     $data = $name . ", " . $date . "\r\n";
 
     $fileHandler = fopen($address, 'a');
@@ -21,7 +21,7 @@ if (validate($date)) {
     echo "Введена некорректная информация";
 }
 
-function validate(string $date): bool
+function validate(string $date, string $name): bool
 {
     $dateBlocks = explode("-", $date);
 
@@ -51,7 +51,12 @@ function validate(string $date): bool
         return false;
     }
 
+    if (count($name) < 3) {
+        return false;
+    }
+
     return true;
 }
 // Добавлена проверка на год. Год не должен быть меньше 1930
 // Добавлена проверка на число. Вводимые данныые не должны быть буквами.
+// Добавлена проверка имени, количество символов не должно быть меньше 3
