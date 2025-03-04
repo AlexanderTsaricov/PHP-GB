@@ -51,7 +51,7 @@ function validate(string $date, string $name): bool
         return false;
     }
 
-    if (count($name) < 3) {
+    if (strlen($name) < 3) {
         return false;
     }
 
