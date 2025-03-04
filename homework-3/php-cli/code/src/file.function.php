@@ -123,7 +123,6 @@ function getPeoplaWithBirthdayToday(array $config): string
     $todayDate = date("d-m");
     $todayDateArray = explode("-", $todayDate);
 
-    $peoples = "";
 
     if (file_exists($address) && is_readable($address)) {
         $file = fopen($address, "r");
@@ -142,6 +141,49 @@ function getPeoplaWithBirthdayToday(array $config): string
             }
         }
         fclose($file);
+        return $result;
+    } else {
+        return handleError("Файл не существует");
+    }
+}
+
+function detelePeople(array $config): string
+{
+    $address = $config['storage']['address'];
+    $name = readline("Введите имя: ");
+    $deleteBoolReult = false;
+    $result = "";
+    $newResultArray = [];
+    if (file_exists($address) && is_readable($address)) {
+        $file = fopen($address, "r");
+        $contents = '';
+
+        while (!feof($file)) {
+            $contents .= fread($file, 100);
+        }
+        $contentsArray = explode("\n", $contents);
+        foreach ($contentsArray as $people) {
+            $peopleArray = explode(",", $people);
+            if ($peopleArray[0] == $name) {
+                $deleteBoolReult = true;
+                continue;
+            }
+            array_push($newResultArray, $people . "\r\n");
+        }
+        fclose($file);
+        $file = fopen($address, "w");
+        fwrite($file, '');
+        fclose($file);
+        $file = fopen($address, 'a');
+        foreach ($newResultArray as $people) {
+            fwrite($file, $people);
+        }
+        fclose($file);
+        if ($deleteBoolReult) {
+            $result .= "Удаление произведено успешно";
+        } else {
+            $result .= handleError("Такого человека не существует");
+        }
         return $result;
     } else {
         return handleError("Файл не существует");

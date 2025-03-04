@@ -32,6 +32,7 @@ function parseCommand(): string
             'read-profile' => 'readProfile',
             'help' => 'helpFunction',
             'find-birthday-today' => 'getPeoplaWithBirthdayToday',
+            'delete-people' => 'detelePeople',
             default => 'helpFunction'
         };
     }
