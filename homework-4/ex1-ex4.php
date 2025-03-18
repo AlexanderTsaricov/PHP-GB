@@ -1,5 +1,7 @@
 <?php
 
+namespace Homework4_ex1ex4;
+
 class Book
 {
     protected $title;

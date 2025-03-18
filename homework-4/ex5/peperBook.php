@@ -1,4 +1,6 @@
 <?php
+
+use Homework4_ex5\Book;
 class PeperBook extends Book
 {
     protected $id;

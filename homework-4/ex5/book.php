@@ -1,4 +1,6 @@
 <?php
+
+namespace Homework4_ex5;
 abstract class Book
 {
     protected $id;
